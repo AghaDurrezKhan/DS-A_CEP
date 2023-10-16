@@ -28,7 +28,7 @@ st.write('Filtered Data:')
 st.write(filtered_data)
 
 # Split the data into features (X) and target (y)
-X = filtered_data[['Area', 'Production', 'Income', 'Expense', 'Debt']]
+X = filtered_data[['Area', 'Production', 'Income', 'Expense']]
 y = filtered_data['Profit']
 
 # Split the data into training and testing sets
@@ -39,8 +39,8 @@ model = LinearRegression()
 model.fit(X_train, y_train)
 
 # Prediction function
-def predict_profit(area, production, income, expense, debt):
-    input_data = [[area, production, income, expense, debt]]
+def predict_profit(area, production, income, expense):
+    input_data = [[area, production, income, expense]]
     prediction = model.predict(input_data)
     return prediction[0]
 
@@ -50,11 +50,10 @@ area = st.sidebar.number_input('Area', min_value=0)
 production = st.sidebar.number_input('Production', min_value=0)
 income = st.sidebar.number_input('Income', min_value=0)
 expense = st.sidebar.number_input('Expense', min_value=0)
-debt = st.sidebar.number_input('Debt', min_value=0)
 
 # Make predictions based on user input
 if st.sidebar.button('Predict'):
-    predicted_profit = predict_profit(area, production, income, expense, debt)
+    predicted_profit = predict_profit(area, production, income, expense)
     st.write(f'Predicted Profit: {predicted_profit:.2f}')
 
 # Model evaluation (optional)
